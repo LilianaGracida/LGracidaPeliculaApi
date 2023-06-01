@@ -1,0 +1,25 @@
+﻿@model ML.Pelicula
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetAll</h2>
+<div class="row">
+    @foreach (ML.Pelicula pelicula in Model.results)
+    {
+        <div class="col mt-3 pt-3">
+            <div class="card text-white bg-dark border-success mb-3 border-4 " style="width: 18rem;">
+                <img src="@pelicula.path@pelicula.backdrop_path" width="150px" height="150px" />
+                <div class="card-body">
+                    <h5 class="card-title card-header text-center bg-secondary">Nombre: @pelicula.title</h5>
+                    <p class="card-text ">Descripcion:@pelicula.overview</p>
+                    <br />
+                    <a href="@Url.Action("AddFavorito", "Pelicula", new { IdPelicula = pelicula.id})" class="btn btn-primary">Favorito</a>
+
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

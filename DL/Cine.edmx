@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cine">
+          <Key>
+            <PropertyRef Name="IdCine" />
+          </Key>
+          <Property Name="IdCine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="IdZona" Type="int" />
+          <Property Name="Venta" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="IdZona" />
+          </Key>
+          <Property Name="IdZona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Cine__IdZona__1273C1CD">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Cine" Type="Self.Cine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="IdZona" />
+            </Principal>
+            <Dependent Role="Cine">
+              <PropertyRef Name="IdZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CineAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+          <Parameter Name="Venta" Type="decimal" Mode="In" />
+          <Parameter Name="IdZona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CineDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCine" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CineGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CineGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCine" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CineUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCine" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+          <Parameter Name="Venta" Type="decimal" Mode="In" />
+          <Parameter Name="IdZona" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ZonaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ZonaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ZonaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdZona" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="CineModelStoreContainer">
+          <EntitySet Name="Cine" EntityType="Self.Cine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cine__IdZona__1273C1CD" Association="Self.FK__Cine__IdZona__1273C1CD">
+            <End Role="Zona" EntitySet="Zona" />
+            <End Role="Cine" EntitySet="Cine" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cine">
+          <Key>
+            <PropertyRef Name="IdCine" />
+          </Key>
+          <Property Name="IdCine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdZona" Type="Int32" />
+          <Property Name="Venta" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Zona" Relationship="Self.FK__Cine__IdZona__1273C1CD" FromRole="Cine" ToRole="Zona" />
+        </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="IdZona" />
+          </Key>
+          <Property Name="IdZona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cines" Relationship="Self.FK__Cine__IdZona__1273C1CD" FromRole="Zona" ToRole="Cine" />
+        </EntityType>
+        <Association Name="FK__Cine__IdZona__1273C1CD">
+          <End Role="Zona" Type="Self.Zona" Multiplicity="0..1" />
+          <End Role="Cine" Type="Self.Cine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zona">
+              <PropertyRef Name="IdZona" />
+            </Principal>
+            <Dependent Role="Cine">
+              <PropertyRef Name="IdZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cines" EntityType="Self.Cine" />
+          <EntitySet Name="Zonas" EntityType="Self.Zona" />
+          <AssociationSet Name="FK__Cine__IdZona__1273C1CD" Association="Self.FK__Cine__IdZona__1273C1CD">
+            <End Role="Zona" EntitySet="Zonas" />
+            <End Role="Cine" EntitySet="Cines" />
+          </AssociationSet>
+          <FunctionImport Name="CineAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Venta" Mode="In" Type="Decimal" />
+            <Parameter Name="IdZona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CineDelete">
+            <Parameter Name="IdCine" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CineGetAll" ReturnType="Collection(CineModel.CineGetAll_Result)" />
+          <FunctionImport Name="CineGetById" ReturnType="Collection(CineModel.CineGetById_Result)">
+            <Parameter Name="IdCine" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CineUpdate">
+            <Parameter Name="IdCine" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Venta" Mode="In" Type="Decimal" />
+            <Parameter Name="IdZona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ZonaAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ZonaGetAll" ReturnType="Collection(CineModel.ZonaGetAll_Result)" />
+          <FunctionImport Name="ZonaGetById" ReturnType="Collection(CineModel.ZonaGetById_Result)">
+            <Parameter Name="IdZona" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="CineGetAll_Result">
+          <Property Type="Int32" Name="IdCine" Nullable="false" />
+          <Property Type="String" Name="Cine" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Venta" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Zona" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="CineGetById_Result">
+          <Property Type="Int32" Name="IdCine" Nullable="false" />
+          <Property Type="String" Name="Cine" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Venta" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Zona" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ZonaGetAll_Result">
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ZonaGetById_Result">
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CineModelStoreContainer" CdmEntityContainer="CineEntities">
+          <EntitySetMapping Name="Cines">
+            <EntityTypeMapping TypeName="CineModel.Cine">
+              <MappingFragment StoreEntitySet="Cine">
+                <ScalarProperty Name="IdCine" ColumnName="IdCine" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zonas">
+            <EntityTypeMapping TypeName="CineModel.Zona">
+              <MappingFragment StoreEntitySet="Zona">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CineAdd" FunctionName="CineModel.Store.CineAdd" />
+          <FunctionImportMapping FunctionImportName="CineDelete" FunctionName="CineModel.Store.CineDelete" />
+          <FunctionImportMapping FunctionImportName="CineGetAll" FunctionName="CineModel.Store.CineGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.CineGetAll_Result">
+                <ScalarProperty Name="IdCine" ColumnName="IdCine" />
+                <ScalarProperty Name="Cine" ColumnName="Cine" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CineGetById" FunctionName="CineModel.Store.CineGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.CineGetById_Result">
+                <ScalarProperty Name="IdCine" ColumnName="IdCine" />
+                <ScalarProperty Name="Cine" ColumnName="Cine" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CineUpdate" FunctionName="CineModel.Store.CineUpdate" />
+          <FunctionImportMapping FunctionImportName="ZonaAdd" FunctionName="CineModel.Store.ZonaAdd" />
+          <FunctionImportMapping FunctionImportName="ZonaGetAll" FunctionName="CineModel.Store.ZonaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.ZonaGetAll_Result">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ZonaGetById" FunctionName="CineModel.Store.ZonaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.ZonaGetById_Result">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
