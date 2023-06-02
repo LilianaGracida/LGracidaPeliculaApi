@@ -14,7 +14,8 @@ namespace ML
         public decimal Venta { get; set; }
         public ML.Zona Zona { get; set; }
         public List<Object> Cines { get; set; } 
-            public decimal Latitud { get; set; }
-            public decimal Longitud { get; set; }
-     }
+        public decimal Latitud { get; set; }
+        public decimal Longitud { get; set; }
+        public ML.Estadistica Estadistica { get; set; }
+    }
 }

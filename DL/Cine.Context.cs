@@ -121,5 +121,25 @@ namespace DL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ZonaGetById_Result>("ZonaGetById", idZonaParameter);
         }
+    
+        public virtual ObjectResult<VentaZona_Result> VentaZona()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona_Result>("VentaZona");
+        }
+    
+        public virtual ObjectResult<VentaZona2_Result> VentaZona2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona2_Result>("VentaZona2");
+        }
+    
+        public virtual ObjectResult<VentaZona3_Result> VentaZona3()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona3_Result>("VentaZona3");
+        }
+    
+        public virtual ObjectResult<VentaZona4_Result> VentaZona4()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona4_Result>("VentaZona4");
+        }
     }
 }

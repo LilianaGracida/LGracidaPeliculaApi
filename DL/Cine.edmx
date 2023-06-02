@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cine">
           <Key>
             <PropertyRef Name="IdCine" />
@@ -54,6 +54,10 @@
           <Parameter Name="Venta" Type="decimal" Mode="In" />
           <Parameter Name="IdZona" Type="int" Mode="In" />
         </Function>
+        <Function Name="VentaZona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VentaZona2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VentaZona3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="VentaZona4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ZonaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
         </Function>
@@ -69,8 +73,7 @@
             <End Role="Cine" EntitySet="Cine" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -119,11 +122,11 @@
             <Parameter Name="IdZona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CineDelete">
-            <Parameter Name="IdCine" Mode="In" Type="Int32" />
+          <Parameter Name="IdCine" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CineGetAll" ReturnType="Collection(CineModel.CineGetAll_Result)" />
           <FunctionImport Name="CineGetById" ReturnType="Collection(CineModel.CineGetById_Result)">
-            <Parameter Name="IdCine" Mode="In" Type="Int32" />
+          <Parameter Name="IdCine" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CineUpdate">
             <Parameter Name="IdCine" Mode="In" Type="Int32" />
@@ -133,12 +136,16 @@
             <Parameter Name="IdZona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ZonaAdd">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
+          <Parameter Name="Nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ZonaGetAll" ReturnType="Collection(CineModel.ZonaGetAll_Result)" />
           <FunctionImport Name="ZonaGetById" ReturnType="Collection(CineModel.ZonaGetById_Result)">
-            <Parameter Name="IdZona" Mode="In" Type="Int32" />
+          <Parameter Name="IdZona" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="VentaZona" ReturnType="Collection(CineModel.VentaZona_Result)" />
+          <FunctionImport Name="VentaZona2" ReturnType="Collection(CineModel.VentaZona2_Result)" />
+          <FunctionImport Name="VentaZona3" ReturnType="Collection(CineModel.VentaZona3_Result)" />
+          <FunctionImport Name="VentaZona4" ReturnType="Collection(CineModel.VentaZona4_Result)" />
         </EntityContainer>
         <ComplexType Name="CineGetAll_Result">
           <Property Type="Int32" Name="IdCine" Nullable="false" />
@@ -163,6 +170,22 @@
         <ComplexType Name="ZonaGetById_Result">
           <Property Type="Int32" Name="IdZona" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="VentaZona_Result">
+          <Property Type="Int32" Name="IdZona" Nullable="true" />
+          <Property Type="Decimal" Name="Venta" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="VentaZona2_Result">
+          <Property Type="Int32" Name="IdZona" Nullable="true" />
+          <Property Type="Decimal" Name="Venta" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="VentaZona3_Result">
+          <Property Type="Int32" Name="IdZona" Nullable="true" />
+          <Property Type="Decimal" Name="Venta" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="VentaZona4_Result">
+          <Property Type="Int32" Name="IdZona" Nullable="true" />
+          <Property Type="Decimal" Name="Venta" Nullable="true" Precision="18" Scale="0" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -230,6 +253,38 @@
               <ComplexTypeMapping TypeName="CineModel.ZonaGetById_Result">
                 <ScalarProperty Name="IdZona" ColumnName="IdZona" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VentaZona" FunctionName="CineModel.Store.VentaZona">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.VentaZona_Result">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VentaZona2" FunctionName="CineModel.Store.VentaZona2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.VentaZona2_Result">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VentaZona3" FunctionName="CineModel.Store.VentaZona3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.VentaZona3_Result">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VentaZona4" FunctionName="CineModel.Store.VentaZona4">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CineModel.VentaZona4_Result">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="Venta" ColumnName="Venta" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -76,6 +76,18 @@
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VentaZona2_Result.cs">
+      <DependentUpon>Cine.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentaZona3_Result.cs">
+      <DependentUpon>Cine.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentaZona4_Result.cs">
+      <DependentUpon>Cine.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentaZona_Result.cs">
+      <DependentUpon>Cine.tt</DependentUpon>
+    </Compile>
     <Compile Include="Zona.cs">
       <DependentUpon>Cine.tt</DependentUpon>
     </Compile>

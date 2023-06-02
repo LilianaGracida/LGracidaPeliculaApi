@@ -18,7 +18,7 @@ namespace PL.Controllers
             return View(cine);
         }
 
-        [HttpPost]
+        [HttpDelete]
         public ActionResult Delete(int IdCine)
         {
             ML.Cine cine = new ML.Cine();
