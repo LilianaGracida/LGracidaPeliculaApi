@@ -17,8 +17,10 @@ namespace DL
         public int IdCine { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public Nullable<int> IdZona { get; set; }
         public Nullable<decimal> Venta { get; set; }
+        public Nullable<double> Latitud { get; set; }
+        public Nullable<double> Longitud { get; set; }
+        public Nullable<int> IdZona { get; set; }
     
         public virtual Zona Zona { get; set; }
     }

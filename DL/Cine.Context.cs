@@ -15,10 +15,10 @@ namespace DL
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class CineEntities : DbContext
+    public partial class CineEntities1 : DbContext
     {
-        public CineEntities()
-            : base("name=CineEntities")
+        public CineEntities1()
+            : base("name=CineEntities1")
         {
         }
     
@@ -28,9 +28,10 @@ namespace DL
         }
     
         public virtual DbSet<Cine> Cines { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Zona> Zonas { get; set; }
     
-        public virtual int CineAdd(string nombre, string direccion, Nullable<decimal> venta, Nullable<int> idZona)
+        public virtual int CineAdd(string nombre, string direccion, Nullable<decimal> venta, Nullable<int> idZona, Nullable<double> latitud, Nullable<double> longitud)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
@@ -48,7 +49,15 @@ namespace DL
                 new ObjectParameter("IdZona", idZona) :
                 new ObjectParameter("IdZona", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CineAdd", nombreParameter, direccionParameter, ventaParameter, idZonaParameter);
+            var latitudParameter = latitud.HasValue ?
+                new ObjectParameter("Latitud", latitud) :
+                new ObjectParameter("Latitud", typeof(double));
+    
+            var longitudParameter = longitud.HasValue ?
+                new ObjectParameter("Longitud", longitud) :
+                new ObjectParameter("Longitud", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CineAdd", nombreParameter, direccionParameter, ventaParameter, idZonaParameter, latitudParameter, longitudParameter);
         }
     
         public virtual int CineDelete(Nullable<int> idCine)
@@ -74,29 +83,24 @@ namespace DL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CineGetById_Result>("CineGetById", idCineParameter);
         }
     
-        public virtual int CineUpdate(Nullable<int> idCine, string nombre, string direccion, Nullable<decimal> venta, Nullable<int> idZona)
+        public virtual ObjectResult<VentaZona_Result> VentaZona()
         {
-            var idCineParameter = idCine.HasValue ?
-                new ObjectParameter("IdCine", idCine) :
-                new ObjectParameter("IdCine", typeof(int));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona_Result>("VentaZona");
+        }
     
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
+        public virtual ObjectResult<VentaZona2_Result> VentaZona2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona2_Result>("VentaZona2");
+        }
     
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
+        public virtual ObjectResult<VentaZona3_Result> VentaZona3()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona3_Result>("VentaZona3");
+        }
     
-            var ventaParameter = venta.HasValue ?
-                new ObjectParameter("Venta", venta) :
-                new ObjectParameter("Venta", typeof(decimal));
-    
-            var idZonaParameter = idZona.HasValue ?
-                new ObjectParameter("IdZona", idZona) :
-                new ObjectParameter("IdZona", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CineUpdate", idCineParameter, nombreParameter, direccionParameter, ventaParameter, idZonaParameter);
+        public virtual ObjectResult<VentaZona4_Result> VentaZona4()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona4_Result>("VentaZona4");
         }
     
         public virtual int ZonaAdd(string nombre)
@@ -122,24 +126,84 @@ namespace DL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ZonaGetById_Result>("ZonaGetById", idZonaParameter);
         }
     
-        public virtual ObjectResult<VentaZona_Result> VentaZona()
+        public virtual int CineUpdate(Nullable<int> idCine, string nombre, string direccion, Nullable<decimal> venta, Nullable<int> idZona, Nullable<double> longitud, Nullable<double> latitud)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona_Result>("VentaZona");
+            var idCineParameter = idCine.HasValue ?
+                new ObjectParameter("IdCine", idCine) :
+                new ObjectParameter("IdCine", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var ventaParameter = venta.HasValue ?
+                new ObjectParameter("Venta", venta) :
+                new ObjectParameter("Venta", typeof(decimal));
+    
+            var idZonaParameter = idZona.HasValue ?
+                new ObjectParameter("IdZona", idZona) :
+                new ObjectParameter("IdZona", typeof(int));
+    
+            var longitudParameter = longitud.HasValue ?
+                new ObjectParameter("Longitud", longitud) :
+                new ObjectParameter("Longitud", typeof(double));
+    
+            var latitudParameter = latitud.HasValue ?
+                new ObjectParameter("Latitud", latitud) :
+                new ObjectParameter("Latitud", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CineUpdate", idCineParameter, nombreParameter, direccionParameter, ventaParameter, idZonaParameter, longitudParameter, latitudParameter);
         }
     
-        public virtual ObjectResult<VentaZona2_Result> VentaZona2()
+        public virtual int AddUsuario(string nombre, string apellidoPaterno, string apellidoMaterno, string email, string userName, byte[] password)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona2_Result>("VentaZona2");
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUsuario", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, emailParameter, userNameParameter, passwordParameter);
         }
     
-        public virtual ObjectResult<VentaZona3_Result> VentaZona3()
+        public virtual ObjectResult<UsuarioGetByEmail_Result> UsuarioGetByEmail(string email)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona3_Result>("VentaZona3");
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetByEmail_Result>("UsuarioGetByEmail", emailParameter);
         }
     
-        public virtual ObjectResult<VentaZona4_Result> VentaZona4()
+        public virtual ObjectResult<UsuarioGetByUserName_Result> UsuarioGetByUserName(string userName)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaZona4_Result>("VentaZona4");
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UsuarioGetByUserName_Result>("UsuarioGetByUserName", userNameParameter);
         }
     }
 }

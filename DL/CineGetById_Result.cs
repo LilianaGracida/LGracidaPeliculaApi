@@ -19,5 +19,7 @@ namespace DL
         public Nullable<decimal> Venta { get; set; }
         public string Zona { get; set; }
         public int IdZona { get; set; }
+        public Nullable<double> Latitud { get; set; }
+        public Nullable<double> Longitud { get; set; }
     }
 }

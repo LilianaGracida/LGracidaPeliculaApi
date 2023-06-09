@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CineEntities context = new DL.CineEntities())
+                using (DL.CineEntities1 context = new DL.CineEntities1())
                 {
                     var zonas = context.ZonaGetAll().ToList();
                     result.Objects = new List<object>();

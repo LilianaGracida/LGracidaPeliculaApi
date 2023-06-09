@@ -11,15 +11,11 @@ namespace DL
 {
     using System;
     
-    public partial class CineGetAll_Result
+    public partial class UsuarioGetByEmail_Result
     {
-        public int IdCine { get; set; }
-        public string Cine { get; set; }
-        public string Direccion { get; set; }
-        public Nullable<decimal> Venta { get; set; }
-        public string Zona { get; set; }
-        public int IdZona { get; set; }
-        public Nullable<double> Latitud { get; set; }
-        public Nullable<double> Longitud { get; set; }
+        public int IdUsuario { get; set; }
+        public string Email { get; set; }
+        public byte[] Password { get; set; }
+        public string UserName { get; set; }
     }
 }

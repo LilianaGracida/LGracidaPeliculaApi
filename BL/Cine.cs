@@ -13,9 +13,9 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CineEntities context = new DL.CineEntities())
+                using (DL.CineEntities1 context = new DL.CineEntities1())
                 {
-                    var query = context.CineAdd(cine.Nombre, cine.Direccion, cine.Venta, cine.Zona.IdZona);
+                    var query = context.CineAdd(cine.Nombre, cine.Direccion, cine.Venta, cine.Zona.IdZona,cine.Latitud,cine.Longitud);
 
                     if (query >= 1)
                     {
@@ -42,9 +42,9 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CineEntities context = new DL.CineEntities())
+                using (DL.CineEntities1 context = new DL.CineEntities1())
                 {
-                    var query = context.CineUpdate(cine.IdCine, cine.Nombre, cine.Direccion, cine.Venta, cine.Zona.IdZona);
+                    var query = context.CineUpdate(cine.IdCine, cine.Nombre, cine.Direccion, cine.Venta, cine.Zona.IdZona,cine.Longitud,cine.Latitud);
 
                     if (query >= 1)
                     {
@@ -71,7 +71,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CineEntities context = new DL.CineEntities())
+                using (DL.CineEntities1 context = new DL.CineEntities1())
                 {
                     var query = context.CineDelete(cine.IdCine);
 
@@ -100,7 +100,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CineEntities context = new DL.CineEntities())
+                using (DL.CineEntities1 context = new DL.CineEntities1())
                 {
                     var obj = context.CineGetById(IdCine).FirstOrDefault();
                     result.Objects = new List<object>();
@@ -112,6 +112,8 @@ namespace BL
                         cine.Nombre = obj.Cine;
                         cine.Direccion = obj.Direccion;
                         cine.Venta = obj.Venta.Value;
+                        cine.Latitud = obj.Latitud.Value;
+                        cine.Longitud = obj.Longitud.Value;
 
                         cine.Zona = new ML.Zona();
                         cine.Zona.IdZona = obj.IdZona;
@@ -143,7 +145,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CineEntities context = new DL.CineEntities())
+                using (DL.CineEntities1 context = new DL.CineEntities1())
                 {
                     var cines = context.CineGetAll().ToList();
                     result.Objects = new List<object>();
@@ -156,6 +158,8 @@ namespace BL
                             cine.Nombre = obj.Cine;
                             cine.Direccion = obj.Direccion;
                             cine.Venta = obj.Venta.Value;
+                            cine.Latitud = obj.Latitud.Value;
+                            cine.Longitud = obj.Longitud.Value;
 
                             cine.Zona = new ML.Zona();
                             cine.Zona.IdZona = obj.IdZona;
